@@ -286,6 +286,8 @@ body::before{
 .order-item.picked{ outline:2px solid var(--green); outline-offset:2px; }
 .order-item.correct{ outline:2px solid var(--ok); outline-offset:2px; }
 .order-item.correct .pos{ background:rgba(75,207,111,.2); color:var(--ok); }
+.order-item.incorrect{ outline:2px solid var(--err); outline-offset:2px; opacity:.85; }
+.order-item.incorrect .pos{ background:rgba(224,87,122,.2); color:var(--err); }
 .order-item.wrong{ animation:shake .35s ease; }
 
 /* ===================== الخاتمة ===================== */

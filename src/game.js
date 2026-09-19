@@ -48,7 +48,8 @@
       lifted: null,
       order: null,
       pickedIndex: null,
-      orderChecked: false
+      orderChecked: false,
+      correctMask: null
     };
   }
 
@@ -216,23 +217,29 @@
     state.order = order;
     state.pickedIndex = null;
     state.orderChecked = false;
+    state.correctMask = null;
     showScreen("order");
     renderOrder();
   }
 
-  function renderOrder() {
+  function renderOrder(justChecked) {
     const list = $("#orderList");
     list.innerHTML = "";
     state.order.forEach((fileId, i) => {
       const f = FILES.find((x) => x.id === fileId);
       const el = document.createElement("div");
-      el.className = "order-item" + (state.pickedIndex === i ? " picked" : "");
+      const mark = state.correctMask ? (state.correctMask[i] ? " correct" : " incorrect") : "";
+      el.className = "order-item" + (state.pickedIndex === i ? " picked" : "") + mark;
       el.style.setProperty("--fcolor", "var(--" + fileColor(fileId) + ")");
       el.dataset.index = String(i);
       el.innerHTML =
         '<span class="pos">' + toAr(i + 1) + "</span>" +
         '<span class="fn">' + f.name + "</span>";
       el.addEventListener("click", () => onOrderItemClick(i));
+      if (justChecked && state.correctMask && !state.correctMask[i]) {
+        el.classList.add("wrong");
+        setTimeout(() => el.classList.remove("wrong"), 350);
+      }
       list.appendChild(el);
     });
     updateProgress();
@@ -240,6 +247,7 @@
   }
 
   function onOrderItemClick(i) {
+    state.correctMask = null;
     if (state.pickedIndex === null) {
       state.pickedIndex = i;
     } else if (state.pickedIndex === i) {
@@ -255,14 +263,8 @@
   function onCheckOrder() {
     const correctMask = state.order.map((id, i) => id === CORRECT_ORDER[i]);
     const allCorrect = correctMask.every(Boolean);
-
-    $$(".order-item", $("#orderList")).forEach((el, i) => {
-      el.classList.toggle("correct", correctMask[i]);
-      if (!correctMask[i]) {
-        el.classList.add("wrong");
-        setTimeout(() => el.classList.remove("wrong"), 350);
-      }
-    });
+    state.correctMask = correctMask;
+    renderOrder(true);
 
     if (allCorrect) {
       $("#orderText").textContent = "الترتيب صحيح! الأرشيف مُرتّب بالكامل.";
@@ -271,8 +273,10 @@
       save();
       setTimeout(showFinal, 600);
     } else {
+      const correctCount = correctMask.filter(Boolean).length;
       state.tries += 1;
-      $("#orderText").textContent = "بعض الملفات في غير موضعها. انقر ملفًا ثم ملفًا آخر ليتبادلا، وحاول مجددًا.";
+      $("#orderText").textContent =
+        "الملفات المظلّلة بالأحمر في غير موضعها الصحيح (" + toAr(correctCount) + " من " + toAr(correctMask.length) + " في موضعه). انقر ملفًا ثم ملفًا آخر ليتبادلا، وحاول مجددًا.";
       $("#orderGuide").classList.add("err");
       save();
     }
