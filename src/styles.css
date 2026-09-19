@@ -115,11 +115,13 @@ body::before{
   padding:.7rem 1.1rem;
 }
 .brand{ display:flex; align-items:center; gap:.6rem; }
-.brand-mark{
-  width:1.9rem; height:1.9rem; flex:none;
+/* شعار الجامعة كحلي داكن، فيوضع على شريحة بيضاء ليظهر على الهيدر الداكن */
+.brand-logo{
+  width:2.1rem; height:2.1rem; flex:none;
+  background:#fff;
   border-radius:.45rem;
-  object-fit:cover;
-  border:1px solid var(--line-2);
+  padding:.2rem;
+  object-fit:contain;
 }
 .brand .nm{ font-weight:800; font-size:1rem; }
 .hdr-side{ display:flex; align-items:center; gap:.7rem; }
@@ -170,16 +172,13 @@ body::before{
   text-align:center; gap:.9rem;
   padding:2rem 1.2rem 2.2rem;
 }
-.nd{
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.35rem .9rem;
-  border-radius:999px;
-  background:rgba(90,185,28,.14);
-  border:1px solid rgba(90,185,28,.35);
-  color:var(--green);
-  font-size:.85rem; font-weight:700;
+.hero-emblem{
+  width:4.5rem; height:4.5rem;
+  border-radius:.9rem;
+  object-fit:cover;
+  border:1px solid var(--line-2);
+  box-shadow:0 .4rem 1rem rgba(0,0,0,.35);
 }
-.nd .n{ font-size:1rem; color:var(--gold); }
 
 .portrait{ display:flex; flex-direction:column; align-items:center; gap:.6rem; }
 .portrait img{
