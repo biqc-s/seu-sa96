@@ -4,7 +4,7 @@
 
   const STORAGE_KEY = "archiveGame:v1";
   const LETTERS = "ABCDEFGHJKLMNPQRSTUVWXY"; // بلا I و O تفاديًا للالتباس
-  const PALETTE = ["blue", "magenta", "green", "gold", "indigo", "teal"];
+  const PALETTE = ["blue", "magenta", "green", "gold", "indigo", "olive", "teal"];
   const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
 
   const $ = (sel, root) => (root || document).querySelector(sel);
@@ -308,25 +308,10 @@
     FILES.forEach((f) => {
       const li = document.createElement("li");
       li.style.setProperty("--tcolor", "var(--" + fileColor(f.id) + ")");
-      let html =
+      li.innerHTML =
         '<div class="tl-date">' + f.date + "</div>" +
         '<div class="tl-name">' + f.name + "</div>" +
         '<div class="tl-event">' + f.event + "</div>";
-      if (f.marks && f.marks.length) {
-        html +=
-          '<div class="tl-marks-ttl">بصمته الزمنية في بناء مؤسسات الدولة</div>' +
-          '<ol class="tl-marks">' +
-          f.marks
-            .map((m) =>
-              "<li>" +
-              '<span class="m-date">' + m.date + "</span>" +
-              '<span class="m-text">' + m.text + "</span>" +
-              "</li>"
-            )
-            .join("") +
-          "</ol>";
-      }
-      li.innerHTML = html;
       list.appendChild(li);
     });
 
