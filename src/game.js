@@ -368,68 +368,93 @@
     });
   }
 
+  function saduBand(ctx, img, y, h, W) {
+    const n = Math.ceil(W / h);
+    for (let i = 0; i < n; i++) ctx.drawImage(img, i * h, y, h, h);
+  }
+
   async function onSaveCard() {
     const canvas = $("#cardCanvas");
     const ctx = canvas.getContext("2d");
     const W = canvas.width, H = canvas.height;
+    const midX = W / 2;
 
-    const grad = ctx.createLinearGradient(0, 0, W, H);
-    grad.addColorStop(0, "#04211f");
-    grad.addColorStop(1, "#082b28");
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, "#082b28");
+    grad.addColorStop(1, "#04211f");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
-    const stripe = ["#0f5fc4", "#961a4d", "#5ab91c", "#a97d2c", "#4b47a3"];
-    stripe.forEach((c, i) => {
-      ctx.fillStyle = c;
-      ctx.globalAlpha = 0.9;
-      ctx.fillRect(0, H - 26 * (stripe.length - i), W, 22);
-    });
-    ctx.globalAlpha = 1;
-
-    ctx.direction = "rtl";
-    ctx.textAlign = "right";
-    const rightX = W - 90;
-
+    const BAND = 76;
     try {
-      if (typeof LOGO_SRC === "string" && LOGO_SRC) {
-        const img = await loadImage(LOGO_SRC);
-        const logoH = 110;
-        const logoW = (img.width / img.height) * logoH;
-        ctx.drawImage(img, rightX - logoW, 80, logoW, logoH);
-      }
+      const sadu = await loadImage(CARD_SADU);
+      ctx.globalAlpha = 0.85;
+      saduBand(ctx, sadu, 0, BAND, W);
+      saduBand(ctx, sadu, H - BAND, BAND, W);
+      ctx.globalAlpha = 1;
     } catch (e) {
-      /* تجاهل تعذر تحميل الشعار */
+      /* تجاهل تعذر تحميل النقش */
     }
 
-    ctx.fillStyle = "#5ab91c";
-    ctx.font = "700 34px Tajawal, sans-serif";
-    ctx.fillText("اليوم الوطني السعودي ٩٦", rightX, 260);
-
-    ctx.fillStyle = "#eef7f2";
-    ctx.font = "800 62px Tajawal, sans-serif";
-    ctx.fillText("لعبة الأرشيف", rightX, 340);
-
-    ctx.fillStyle = "rgba(238,247,242,.7)";
-    ctx.font = "400 30px Tajawal, sans-serif";
-    ctx.fillText("رمز الإتمام", rightX, 470);
-
-    ctx.direction = "ltr";
-    ctx.textAlign = "left";
-    ctx.fillStyle = "#a97d2c";
-    ctx.font = "700 56px ui-monospace, monospace";
-    ctx.fillText(state.code || "", 90, 545);
+    try {
+      const img = await loadImage(CARD_PORTRAIT);
+      const side = Math.min(img.width, img.height);
+      const sx = (img.width - side) / 2;
+      const r = 150, cy = 330;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(midX, cy, r, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.drawImage(img, sx, 0, side, side, midX - r, cy - r, r * 2, r * 2);
+      ctx.restore();
+      ctx.beginPath();
+      ctx.arc(midX, cy, r, 0, Math.PI * 2);
+      ctx.lineWidth = 8;
+      ctx.strokeStyle = "#a97d2c";
+      ctx.stroke();
+    } catch (e) {
+      /* تجاهل تعذر تحميل الصورة */
+    }
 
     ctx.direction = "rtl";
-    ctx.textAlign = "right";
-    ctx.fillStyle = "rgba(238,247,242,.7)";
-    ctx.font = "400 28px Tajawal, sans-serif";
-    ctx.fillText("مدة البحث: " + $("#stTime").textContent, rightX, 640);
-    ctx.fillText("محاولات خاطئة: " + $("#stTries").textContent, rightX, 690);
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#eef7f2";
+    ctx.font = "800 44px Tajawal, sans-serif";
+    ctx.fillText("الأمير مساعد بن عبدالرحمن آل سعود", midX, 570);
 
     ctx.fillStyle = "rgba(238,247,242,.55)";
-    ctx.font = "400 24px Tajawal, sans-serif";
-    ctx.fillText("كلية الحوسبة والمعلوماتية", rightX, H - 150);
+    ctx.font = "400 28px Tajawal, sans-serif";
+    ctx.fillText("رحمه الله · أخو الملك المؤسس", midX, 620);
+
+    ctx.fillStyle = "#5ab91c";
+    ctx.font = "700 32px Tajawal, sans-serif";
+    ctx.fillText("اليوم الوطني السعودي ٩٦", midX, 730);
+
+    ctx.fillStyle = "#eef7f2";
+    ctx.font = "800 64px Tajawal, sans-serif";
+    ctx.fillText("لعبة الأرشيف", midX, 810);
+
+    ctx.fillStyle = "rgba(238,247,242,.7)";
+    ctx.font = "400 28px Tajawal, sans-serif";
+    ctx.fillText("رمز الإتمام", midX, 910);
+
+    ctx.direction = "ltr";
+    ctx.fillStyle = "#a97d2c";
+    ctx.font = "700 58px ui-monospace, monospace";
+    ctx.fillText(state.code || "", midX, 985);
+
+    // عزل القيم الرقمية (U+2066…U+2069) وإلا انعكس "٠٠:٠٢" بصريًا داخل سطر عربي
+    const iso = (s) => "⁦" + s + "⁩";
+    ctx.direction = "rtl";
+    ctx.fillStyle = "rgba(238,247,242,.7)";
+    ctx.font = "400 28px Tajawal, sans-serif";
+    ctx.fillText("مدة البحث: " + iso($("#stTime").textContent), midX, 1085);
+    ctx.fillText("محاولات خاطئة: " + iso($("#stTries").textContent), midX, 1135);
+
+    ctx.fillStyle = "rgba(238,247,242,.55)";
+    ctx.font = "400 26px Tajawal, sans-serif";
+    ctx.fillText("كلية الحوسبة والمعلوماتية", midX, 1225);
 
     const url = canvas.toDataURL("image/png");
     const a = document.createElement("a");

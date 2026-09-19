@@ -13,7 +13,7 @@
 <header class="hdr">
   <div class="hdr-in">
     <div class="brand">
-      <img src="assets/logo-icon.png" alt="شعار كلية الحوسبة والمعلوماتية">
+      <img class="brand-mark" src="assets/sadu.webp" alt="" aria-hidden="true">
       <span class="nm">لعبة الأرشيف</span>
     </div>
     <div class="hdr-side">
@@ -26,15 +26,29 @@
 
 <!-- ===================== المدخل ===================== -->
 <main id="intro" class="screen">
-  <span class="nd"><span class="n">٩٦</span> اليوم الوطني السعودي</span>
-  <h1>لعبة الأرشيف</h1>
-  <p class="sub">سبعة ملفات من سيرة الأمير مساعد بن عبدالرحمن آل سعود، رحمه الله، وأوراقها متناثرة على طاولة واحدة. أعد للأرشيف نظامه.</p>
-  <button id="startBtn" class="ui" style="margin-inline:auto;min-width:14rem">ابدأ</button>
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-in">
+      <span class="nd"><span class="n">٩٦</span> اليوم الوطني السعودي</span>
+      <figure class="portrait">
+        <img src="assets/musaid.jpg" alt="صورة الأمير مساعد بن عبدالرحمن آل سعود">
+        <figcaption>
+          <b>الأمير مساعد بن عبدالرحمن آل&nbsp;سعود</b>
+          <span>رحمه الله · أخو الملك المؤسس</span>
+        </figcaption>
+      </figure>
+      <h1>لعبة الأرشيف</h1>
+      <p class="sub">سبعة ملفات من سيرته، وأوراقها متناثرة على طاولة واحدة. أعد للأرشيف نظامه.</p>
+      <button id="startBtn" class="ui">ابدأ</button>
+    </div>
+  </section>
   <footer class="ftr">
-    <img src="assets/logo-word.png" alt="كلية الحوسبة والمعلوماتية">
-    <span class="org">كلية الحوسبة والمعلوماتية</span>
-    <span class="meta">اليوم الوطني السعودي ٩٦</span>
-    <button class="link" data-srcs>المصادر</button>
+    <img class="ftr-banner" src="assets/nd-banner.webp" alt="اليوم الوطني السعودي — عزّنا بطبعنا">
+    <div class="ftr-in">
+      <span class="org">كلية الحوسبة والمعلوماتية</span>
+      <span class="meta">اليوم الوطني السعودي ٩٦</span>
+      <button class="link" data-srcs>المصادر</button>
+    </div>
   </footer>
 </main>
 
@@ -58,8 +72,15 @@
 <main id="final" class="screen" hidden>
   <h2 class="secttl">الأرشيف مُرتّب</h2>
   <div class="closing">
+    <figure class="who">
+      <img src="assets/musaid.jpg" alt="صورة الأمير مساعد بن عبدالرحمن آل سعود">
+      <figcaption>
+        <b>الأمير مساعد بن عبدالرحمن آل&nbsp;سعود</b>
+        <span>رحمه الله · أخو الملك المؤسس</span>
+      </figcaption>
+    </figure>
     <p>سبعة ملفات تروي بصمة رجلٍ واحد. واليوم الوطني ليس ذكرى تاريخٍ فحسب، بل تخليدٌ لمن أسّسوا هذه البلاد وبنوا مؤسساتها لبنةً لبنة.</p>
-    <p>الأمير مساعد بن عبدالرحمن آل سعود، رحمه الله، أخو الملك المؤسس: دعا إلى تعليم المرأة قبل أن يبدأ، وفتح أول مكتبة عامة في الرياض في بيته، وأسّس جهازَي الرقابة في الدولة ورأسهما، وحمل حقيبة المالية أربعة عشر عامًا. وفي 1448هـ صدر التوجيه الكريم بإطلاق اسمه على الجامعة السعودية الإلكترونية، لتبقى سيرته حاضرة بين طلابها.</p>
+    <p>دعا إلى تعليم المرأة قبل أن يبدأ، وفتح أول مكتبة عامة في الرياض في بيته، وأسّس جهازَي الرقابة في الدولة ورأسهما، وحمل حقيبة المالية أربعة عشر عامًا. وفي 1448هـ صدر التوجيه الكريم بإطلاق اسمه على الجامعة السعودية الإلكترونية، لتبقى سيرته حاضرة بين طلابها.</p>
   </div>
   <ul class="timeline" id="timeline"></ul>
   <div class="stats">
@@ -79,11 +100,14 @@
   <div class="actions">
     <button id="resetBtn" class="btn-quiet ui">ابدأ من جديد</button>
   </div>
+  <img class="band" src="assets/nd-photo.webp" alt="من تصوير حملة اليوم الوطني السعودي">
   <footer class="ftr">
-    <img src="assets/logo-word.png" alt="كلية الحوسبة والمعلوماتية">
-    <span class="org">كلية الحوسبة والمعلوماتية</span>
-    <span class="meta">اليوم الوطني السعودي ٩٦</span>
-    <button class="link" data-srcs>المصادر</button>
+    <img class="ftr-banner" src="assets/nd-banner.webp" alt="اليوم الوطني السعودي — عزّنا بطبعنا">
+    <div class="ftr-in">
+      <span class="org">كلية الحوسبة والمعلوماتية</span>
+      <span class="meta">اليوم الوطني السعودي ٩٦</span>
+      <button class="link" data-srcs>المصادر</button>
+    </div>
   </footer>
   <canvas id="cardCanvas" width="1080" height="1350"></canvas>
 </main>
@@ -97,7 +121,7 @@
       <li><span class="n">٢</span><span>انقر الملف الذي تظنها تخصّه أسفل الشاشة.</span></li>
       <li><span class="n">٣</span><span>بعد امتلاء الملفات، رتّبها من الأقدم إلى الأحدث.</span></li>
     </ul>
-    <p style="color:var(--on-ink-mute);font-size:.9rem;margin:0 0 1rem">لا خسارة في اللعبة: الورقة الخاطئة تعود إلى الطاولة فقط.</p>
+    <p class="modal-note">لا خسارة في اللعبة: الورقة الخاطئة تعود إلى الطاولة فقط.</p>
     <button id="helpClose" class="ui" style="width:100%">فهمت</button>
   </div>
 </div>
@@ -112,7 +136,7 @@
   </div>
 </div>
 
-<script>const LOGO_SRC="assets/logo-full.png";</script>
+<script>const CARD_PORTRAIT="assets/musaid.jpg";const CARD_SADU="assets/sadu.webp";</script>
 <script src="src/data.js"></script>
 <script src="src/game.js"></script>
 </body>
