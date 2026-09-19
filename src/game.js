@@ -429,7 +429,7 @@
 
     ctx.fillStyle = "rgba(238,247,242,.55)";
     ctx.font = "400 24px Tajawal, sans-serif";
-    ctx.fillText("نادي الرياضات الإلكترونية — إدارة تطوير الألعاب", rightX, H - 150);
+    ctx.fillText("كلية الحوسبة والمعلوماتية", rightX, H - 150);
 
     const url = canvas.toDataURL("image/png");
     const a = document.createElement("a");
