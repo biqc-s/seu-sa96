@@ -308,10 +308,25 @@
     FILES.forEach((f) => {
       const li = document.createElement("li");
       li.style.setProperty("--tcolor", "var(--" + fileColor(f.id) + ")");
-      li.innerHTML =
+      let html =
         '<div class="tl-date">' + f.date + "</div>" +
         '<div class="tl-name">' + f.name + "</div>" +
         '<div class="tl-event">' + f.event + "</div>";
+      if (f.marks && f.marks.length) {
+        html +=
+          '<div class="tl-marks-ttl">بصمته الزمنية في بناء مؤسسات الدولة</div>' +
+          '<ol class="tl-marks">' +
+          f.marks
+            .map((m) =>
+              "<li>" +
+              '<span class="m-date">' + m.date + "</span>" +
+              '<span class="m-text">' + m.text + "</span>" +
+              "</li>"
+            )
+            .join("") +
+          "</ol>";
+      }
+      li.innerHTML = html;
       list.appendChild(li);
     });
 

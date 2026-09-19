@@ -48,8 +48,8 @@ body{
 }
 img{ max-width:100%; display:block; }
 button{ font:inherit; color:inherit; }
-h1,h2,h3,p,ul{ margin:0; }
-ul{ padding:0; list-style:none; }
+h1,h2,h3,p,ul,ol{ margin:0; }
+ul,ol{ padding:0; list-style:none; }
 
 /* شبكة زخرفية خفيفة مستوحاة من خلفية دليل الهوية */
 body::before{
@@ -295,13 +295,14 @@ body::before{
 .closing p{ color:var(--on-ink-mute); max-width:40rem; }
 
 .timeline{ display:flex; flex-direction:column; gap:0; position:relative; }
-.timeline li{
+.timeline > li{
   position:relative;
-  padding:0 0 1.3rem 1.6rem;
+  padding-block:0 1.3rem;
+  padding-inline:1.1rem 0;
   border-inline-start:2px solid var(--line-2);
 }
-.timeline li:last-child{ border-color:transparent; padding-bottom:0; }
-.timeline li::before{
+.timeline > li:last-child{ border-color:transparent; padding-bottom:0; }
+.timeline > li::before{
   content:"";
   position:absolute; inset-inline-start:-.42rem; top:.15rem;
   width:.8rem; height:.8rem; border-radius:50%;
@@ -311,6 +312,37 @@ body::before{
 .timeline .tl-date{ font-size:.78rem; color:var(--on-ink-faint); font-weight:700; }
 .timeline .tl-name{ font-weight:800; margin-top:.1rem; }
 .timeline .tl-event{ font-size:.88rem; color:var(--on-ink-mute); margin-top:.25rem; }
+
+/* البصمة الزمنية: تسلسل فرعي داخل ملف واحد */
+.tl-marks-ttl{
+  margin-top:1rem;
+  font-size:.76rem; font-weight:800;
+  color:var(--gold);
+}
+.tl-marks{
+  margin-top:.55rem;
+  display:flex; flex-direction:column; gap:.7rem;
+  padding-inline-start:.9rem;
+  border-inline-start:1px dashed var(--line-2);
+}
+.tl-marks li{ position:relative; }
+.tl-marks li::before{
+  content:"";
+  position:absolute; inset-inline-start:-1.09rem; top:.4rem;
+  width:.38rem; height:.38rem; border-radius:50%;
+  background:var(--tcolor, var(--gold));
+}
+.tl-marks .m-date{
+  display:block;
+  font-size:.72rem; font-weight:700;
+  color:var(--gold);
+  font-variant-numeric:tabular-nums;
+}
+.tl-marks .m-text{
+  display:block;
+  font-size:.84rem; color:var(--on-ink-mute);
+  margin-top:.1rem;
+}
 
 .stats{ display:flex; gap:1rem; }
 .stat{
