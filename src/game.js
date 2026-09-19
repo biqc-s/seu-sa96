@@ -325,10 +325,10 @@
     state.code = code;
 
     if (typeof FORM_URL === "string" && FORM_URL.trim()) {
-      $("#regLine").textContent = "سجّل مشاركتك في أقل من دقيقة عبر حسابك الجامعي باستخدام الرمز أدناه:";
+      $("#regLine").textContent = "احفظ البطاقة وانسخ الرمز أدناه، ثم ارفعهما في نموذج إتمام المشاركة:";
       $("#regBtn").hidden = false;
     } else {
-      $("#regLine").textContent = "احتفظ برمز الإتمام أدناه — سيُعلن رابط التسجيل قريبًا.";
+      $("#regLine").textContent = "احتفظ برمز الإتمام والبطاقة أدناه — سيُعلن نموذج إتمام المشاركة قريبًا.";
       $("#regBtn").hidden = true;
     }
 

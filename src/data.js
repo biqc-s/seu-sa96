@@ -130,5 +130,5 @@ const FILES = [
   }
 ];
 
-/* رابط نموذج التسجيل — استبدله برابط النموذج الفعلي قبل النشر. */
-const FORM_URL = "";
+/* رابط نموذج إتمام المشاركة (رفع البطاقة ولصق الرمز). */
+const FORM_URL = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=OnYAH4cfO0e7obbHRq8D5LYXEciXLoNHpbvejDowiUlUQVlTUjRYQUwwNTM4STFHS0xRVjFRRUZRSS4u";
