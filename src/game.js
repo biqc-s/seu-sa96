@@ -311,7 +311,10 @@
       li.innerHTML =
         '<div class="tl-date">' + f.date + "</div>" +
         '<div class="tl-name">' + f.name + "</div>" +
-        '<div class="tl-event">' + f.event + "</div>";
+        '<div class="tl-event">' + f.event + "</div>" +
+        (f.image
+          ? '<img class="tl-img" src="' + f.image + '" alt="' + (f.imageAlt || "") + '">'
+          : "");
       list.appendChild(li);
     });
 
