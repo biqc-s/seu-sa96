@@ -179,6 +179,12 @@ body::before{
   border:1px solid var(--line-2);
   box-shadow:0 .4rem 1rem rgba(0,0,0,.35);
 }
+.hero-note{
+  max-width:28rem;
+  font-size:.92rem;
+  color:var(--on-ink-mute);
+}
+.hero-note b{ color:var(--green); font-weight:800; }
 
 .portrait{ display:flex; flex-direction:column; align-items:center; gap:.6rem; }
 .portrait img{
