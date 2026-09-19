@@ -291,6 +291,7 @@ body::before{
 .order-item.wrong{ animation:shake .35s ease; }
 
 /* ===================== الخاتمة ===================== */
+.closing{ display:flex; flex-direction:column; gap:.8rem; }
 .closing p{ color:var(--on-ink-mute); max-width:40rem; }
 
 .timeline{ display:flex; flex-direction:column; gap:0; position:relative; }

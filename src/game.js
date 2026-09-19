@@ -4,7 +4,7 @@
 
   const STORAGE_KEY = "archiveGame:v1";
   const LETTERS = "ABCDEFGHJKLMNPQRSTUVWXY"; // بلا I و O تفاديًا للالتباس
-  const PALETTE = ["blue", "magenta", "green", "gold", "indigo"];
+  const PALETTE = ["blue", "magenta", "green", "gold", "indigo", "teal"];
   const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
 
   const $ = (sel, root) => (root || document).querySelector(sel);
