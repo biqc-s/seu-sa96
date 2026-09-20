@@ -214,6 +214,20 @@ body::before{
 .ftr .org{ color:var(--on-ink-mute); font-weight:700; }
 .ftr .meta::before{ content:"·"; margin-inline-end:.8rem; color:var(--on-ink-faint); }
 
+.ftr-help{
+  text-align:center;
+  font-size:.78rem; line-height:1.9;
+  color:var(--on-ink-faint);
+}
+/* البريد نصّ لاتيني داخل فقرة عربية: يُعزل لئلا ينعكس ترتيبه بصريًا */
+.ftr-help a{
+  direction:ltr; unicode-bidi:isolate;
+  display:inline-block;
+  color:var(--green);
+  text-decoration:underline; text-underline-offset:.2rem;
+  word-break:break-all;
+}
+
 /* ---- عناوين الأقسام ---- */
 .secttl{ font-size:1.3rem; font-weight:800; }
 .secttl::after{
