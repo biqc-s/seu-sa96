@@ -224,6 +224,7 @@
 
   function renderOrder(justChecked) {
     const list = $("#orderList");
+    const last = state.order.length - 1;
     list.innerHTML = "";
     state.order.forEach((fileId, i) => {
       const f = FILES.find((x) => x.id === fileId);
@@ -234,8 +235,18 @@
       el.dataset.index = String(i);
       el.innerHTML =
         '<span class="pos">' + toAr(i + 1) + "</span>" +
-        '<span class="fn">' + f.name + "</span>";
+        '<span class="oi-main">' +
+        '<span class="fn">' + f.name + "</span>" +
+        '<span class="od">' + f.date + "</span>" +
+        "</span>" +
+        '<span class="oi-moves">' +
+        '<button class="mv" type="button" aria-label="تحريك للأعلى"' + (i === 0 ? " disabled" : "") + ">▲</button>" +
+        '<button class="mv" type="button" aria-label="تحريك للأسفل"' + (i === last ? " disabled" : "") + ">▼</button>" +
+        "</span>";
       el.addEventListener("click", () => onOrderItemClick(i));
+      const [up, down] = el.querySelectorAll(".mv");
+      up.addEventListener("click", (e) => { e.stopPropagation(); moveOrderItem(i, -1); });
+      down.addEventListener("click", (e) => { e.stopPropagation(); moveOrderItem(i, 1); });
       if (justChecked && state.correctMask && !state.correctMask[i]) {
         el.classList.add("wrong");
         setTimeout(() => el.classList.remove("wrong"), 350);
@@ -244,6 +255,16 @@
     });
     updateProgress();
     save();
+  }
+
+  function moveOrderItem(i, dir) {
+    const j = i + dir;
+    if (j < 0 || j >= state.order.length) return;
+    const a = state.order;
+    [a[i], a[j]] = [a[j], a[i]];
+    state.correctMask = null;
+    state.pickedIndex = null;
+    renderOrder();
   }
 
   function onOrderItemClick(i) {
@@ -276,7 +297,7 @@
       const correctCount = correctMask.filter(Boolean).length;
       state.tries += 1;
       $("#orderText").textContent =
-        "الملفات المظلّلة بالأحمر في غير موضعها الصحيح (" + toAr(correctCount) + " من " + toAr(correctMask.length) + " في موضعه). انقر ملفًا ثم ملفًا آخر ليتبادلا، وحاول مجددًا.";
+        "الملفات المظلّلة بالأحمر في غير موضعها الصحيح (" + toAr(correctCount) + " من " + toAr(correctMask.length) + " في موضعه). حرّكها بالأسهم حسب التواريخ، وحاول مجددًا.";
       $("#orderGuide").classList.add("err");
       save();
     }

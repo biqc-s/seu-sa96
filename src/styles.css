@@ -353,7 +353,26 @@ body::before{
   display:flex; align-items:center; justify-content:center;
   font-weight:800; font-size:.85rem; flex:none;
 }
+.order-item .oi-main{ flex:1; min-width:0; display:flex; flex-direction:column; gap:.15rem; }
 .order-item .fn{ font-weight:700; font-size:.95rem; }
+.order-item .od{
+  font-size:.75rem; color:var(--on-ink-faint);
+  direction:rtl; unicode-bidi:isolate;
+}
+
+.oi-moves{ display:flex; flex-direction:column; gap:.25rem; flex:none; }
+.mv{
+  width:2.3rem; height:2rem;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line-2);
+  background:rgba(238,247,242,.06);
+  border-radius:.4rem;
+  font-size:.7rem; line-height:1;
+  cursor:pointer;
+  transition:background .15s ease, border-color .15s ease;
+}
+.mv:hover:not(:disabled){ background:rgba(238,247,242,.14); border-color:var(--green); }
+.mv:disabled{ opacity:.28; cursor:not-allowed; }
 .order-item.picked{ outline:2px solid var(--green); outline-offset:2px; }
 .order-item.correct{ outline:2px solid var(--ok); outline-offset:2px; }
 .order-item.correct .pos{ background:rgba(75,207,111,.2); color:var(--ok); }
@@ -517,6 +536,11 @@ body::before{
   /* لسان الملف يُقصّ داخل شريط ذي overflow، فيُستبدل بالحد العلوي */
   .file-slot::before{ display:none; }
   .file-slot .fn{ font-size:.82rem; }
+
+  /* أهداف لمس أكبر لأزرار التحريك */
+  .mv{ width:2.7rem; height:2.3rem; font-size:.78rem; }
+  .order-item{ padding:.7rem .8rem; gap:.6rem; }
+  .order-item .fn{ font-size:.9rem; }
 }
 
 /* ===================== أدوات مساعدة ===================== */
