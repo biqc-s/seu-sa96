@@ -516,13 +516,33 @@
   }
 
   /* ===================== بدء التشغيل ===================== */
+  /* المقدمة الافتتاحية: تُعرض للزائر الجديد فقط، وتُخطّى بأي نقرة */
+  function setupSplash(resuming) {
+    const el = $("#splash");
+    if (!el) return;
+    if (resuming) { el.remove(); return; }
+
+    const reduced = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let timer;
+    const dismiss = () => {
+      clearTimeout(timer);
+      // بلا حركة لا يُطلق transitionend، فتُحذف فورًا بدل انتظار شبكة الأمان
+      if (reduced) { el.remove(); return; }
+      el.classList.add("done");
+      el.addEventListener("transitionend", () => el.remove(), { once: true });
+      setTimeout(() => el.remove(), 900);
+    };
+    el.addEventListener("click", dismiss);
+    el.addEventListener("touchstart", dismiss, { passive: true });
+    timer = setTimeout(dismiss, 3000);
+  }
+
   function init() {
     const saved = load();
-    if (saved && saved.screen && saved.screen !== "intro") {
-      state = Object.assign(freshState(), saved);
-    } else {
-      state = freshState();
-    }
+    const resuming = !!(saved && saved.screen && saved.screen !== "intro");
+    state = resuming ? Object.assign(freshState(), saved) : freshState();
+    setupSplash(resuming);
 
     renderSources();
     wireModal("helpModal", [$("#helpBtn")], "helpClose");
