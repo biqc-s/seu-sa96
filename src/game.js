@@ -473,9 +473,14 @@
     ctx.fillText("مدة البحث: " + iso($("#stTime").textContent), midX, 1085);
     ctx.fillText("محاولات خاطئة: " + iso($("#stTries").textContent), midX, 1135);
 
+    // السطران يُرفعان قليلًا ليبقيا فوق شريط السدو السفلي (يبدأ عند H-76)
     ctx.fillStyle = "rgba(238,247,242,.55)";
     ctx.font = "400 26px Tajawal, sans-serif";
-    ctx.fillText("كلية الحوسبة والمعلوماتية", midX, 1225);
+    ctx.fillText("كلية الحوسبة والمعلوماتية", midX, 1198);
+
+    ctx.fillStyle = "rgba(238,247,242,.5)";
+    ctx.font = "400 25px Tajawal, sans-serif";
+    ctx.fillText("تصميم وتطوير: سعيد بن أحمد عسيري", midX, 1242);
 
     const url = canvas.toDataURL("image/png");
     const a = document.createElement("a");

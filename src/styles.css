@@ -279,6 +279,13 @@ body::before{
 .ftr .org{ color:var(--on-ink-mute); font-weight:700; }
 .ftr .meta::before{ content:"·"; margin-inline-end:.8rem; color:var(--on-ink-faint); }
 
+.ftr-by{
+  text-align:center;
+  font-size:.82rem;
+  color:var(--on-ink-mute);
+}
+.ftr-by b{ color:var(--on-ink); font-weight:800; }
+
 .ftr-help{
   text-align:center;
   font-size:.78rem; line-height:1.9;
